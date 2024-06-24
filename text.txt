@@ -1,0 +1,52 @@
+HTML: kam krijuar nje div container dhe brenda tij dy dive te tjera nje per imazhet dhe nje per butonin "upload" 
+dhe input type file. Gjithashtu brenda tij kam vendosur edhe 2 butona per te levizur majtas dhe djathtas fotot ne slider.
+
+CSS: stilizoj dhe pozicionoj elementet. Perdor position:relative per container
+dhe position abolute per femijet e tij, ne menyre qe ti pozicionoj ata ne lidhje me 
+divin prind.
+
+JS: selektoj elementet e html ne js. Si fillim jam kujdesur qe te mund te shtoj edhe imazhe te tjera krahas atyre
+qe kam shtuar ne menyre statike. Vendos addEventListener per input type file
+dhe kur ndodh eventi change, une selektoj filet dhe per secilin prej tyre krijoj objektin
+FileReader() dhe lexoj filen si url nepermjet metodes readAsDataURL()
+onload une marr url-ne dhe krijoj imazh me src si url qe mora. dhe kete imazh e shtoj tek slideri.
+Ne momentin qe klikoj uploadButton hapet dritarja per te selektuar filet.
+
+Per pjesen e funksionalitet te sliderit kujdesem te perfshij mouseevents dhe touchevents.
+
+Fillimisht kam ndertuar funksionin qe shfaq apo fsheh shigjetat e klikimit.
+Ne momentin qe nuk ka me imazhe ne te majte apo ne te djathte edhe shigjeta ne ate drejtim duhet
+te mos shfaqet me. Dy shigjetat i kam selektuar nga HMTL me querySelectorAll
+qe kthen Nodelist prandaj i selektoj shigjetat me indekset 0 dhe 1.
+fillimisht kam llogaritur scrollWidth qe perfaqeson widthin maksiomal qe mund te bej scroll
+horizontalisht, pra nga slider.scrollWidth qe perfaqeson gjithe widthin e sliderit duke perfshire gjithe imazhet
+zbres slider.clientWidht qe perfaqeson widthin e sliderit qe klienti sheh pra ate width qe une kam percaktuar ne CSS
+qe slideri te shfaqet. Nga kjo zbitje une fitoj widthin e conteni-it qe eshte overflowed
+pra ajo pjese e sliderit qe une duhet te bej scroll per ta pare.
+Nese slide.scrollLeft eshte 0 une nuk kam me imazhe ne te majte, prandaj shigjeten e majte nuk e afishoj 
+duke perdorur display:none, ndersa nese slide.scrollLeft === scrollWidth une kam arritur ne fund pra kam bere scroll gjithe 
+imazhet nuk afishoj shigjeten e djathte me.
+
+Per secilen nga shigjetat qe klikohet duhet qe bej te mundur levizjen e imazheve
+marr widthin e imazhit duke i shtuar edhe margin, kontolloj nese icon e majte eshte klikuar, nese po 
+nga slider.scrollLeft zbres widhtin e imazhit, nese kam klikuar icon right e shtoj widthin e imazhit. 
+Duke perdorur slider.scrollLeft une bej scroll horizontalisht, pra nese klikoj majtas vleres aktuale se sa px kemi bere scroll majtas
+i heq widthin e nje imazhi, ose nese dua te leviz djathtas ja shtoj.
+dhe therras metoden per afishimin ose jo te icons.
+
+
+Pervec levizjes se imazheve bazuar tek dy butonat, jam kujdesur edhe per levizjen e tyre me
+mouse dhe touch events, pra duke klikuar dhe bere drag une mund te leviz imazhet majtas apo djathtas.
+Per kete une kam perdorur eventet si mousedown touchstart, mousemove touchmove, dhe mouseup touchend.
+eshte metoda dragging ajo qe ben te mundur levizjen e imazheve duke klikuar dhe bere drag. 
+Ketu pasi kontrolloj nese drag ka filluar me isDragStart===true, vendos slider.scrollLeft=prevScrollLeft - positionDiff
+pra slideri do bej scroll bazuar sa mouse apo touch point ka levizur qe kur drag filloi
+dhe vendos klasen e krijuar ne css .dragging 
+
+Ne dragStop heq klasen .dragging nga slideri dhe isDragging is jap vlere false per te kuptuar
+qe nuk po bej me drag.
+
+
+
+
+
